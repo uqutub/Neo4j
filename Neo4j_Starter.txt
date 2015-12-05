@@ -1,9 +1,10 @@
 Step 1:
+-------
 Install Neo4j Graph Database from (http://neo4j.com/download/) free edition (Community Edition) after install one widnow will be appeared just press 'start' and above status will be turned around into green color and just click on given link, should be something like ( http://localhost:7474 ).
 
 Note: After open page on browser. there are three major portion, left hand side bar, top textarea and results are shown below given textarea.
 
-
+-----------------------------------------------------------------------------------------------
 Create Nodes: (Add)
 Lets create Nodes:
 Syntax: 
@@ -13,6 +14,7 @@ Syntax:
 Note: we are created two nodes, one for customer and other for address, 'Cust' is a node name & 'Customer' is a Label name.
 
 
+--------------------------------------------------------------------------------------------------
 Get Customer Node data: (Select)
 Syntax: 
 	Match (Cust: Customer) Return Cust;
@@ -24,6 +26,7 @@ For All Nodes result:
 	Match (n) Return n;
 
 
+----------------------------------------------------------------------------------------------------
 Set Property: (Edit/Update)
 Syntax:
 	Match (Cust: Customer) Where Cust.customerName = "Customer A" Set Cust.age = 30;
@@ -31,11 +34,40 @@ OR
 	Match (Cust: Customer {customerName: "Customer A"}) Set Cust.age = 30;
 	
 
+------------------------------------------------------------------------------------------------------
 Create RelationShip: (One to One)
 Syntax:
 	Match (Cust: Customer{customerName: "Customer A"}), (Addr: Address{address: "Address 1"}) Create (Cust) - [caR: ADDRESS_BELONGS_TO{relationName: "Address Belongs to"}] -> (Addr)
 
 
 
+----------------------------------------------------------------------------------------------------------
+Scenario (Make realtionship between books and authors):
+------------
+Add Book Nodes:
+	Create (Bk: Book {bookId: 1, bookName: "Book 1", authorId: 1});
+	Create (Bk: Book {bookId: 2, bookName: "Book 2", authorId: 1});
+	Create (Bk: Book {bookId: 3, bookName: "Book 3", authorId: 1});
+	Create (Bk: Book {bookId: 4, bookName: "Book 4", authorId: 2});
+	Create (Bk: Book {bookId: 5, bookName: "Book 5", authorId: 2});
+	Create (Bk: Book {bookId: 6, bookName: "Book 6", authorId: 2});
+	Create (Bk: Book {bookId: 7, bookName: "Book 7", authorId: 3});
+	Create (Bk: Book {bookId: 8, bookName: "Book 8", authorId: 3});
+	Create (Bk: Book {bookId: 9, bookName: "Book 9", authorId: 3});
+	Create (Bk: Book {bookId: 10, bookName: "Book 10", authorId: 1});
 
+Add Author Nodes:
+	Create (Auth: Author{authorId: 1, name: "Author 1"});
+	Create (Auth: Author{authorId: 2, name: "Author 2"});
+	Create (Auth: Author{authorId: 3, name: "Author 3"});
+
+
+Create RelationShip:
+	Macth (Bk: Book{authorId: 1}), (Auth: Author{authorId: 1}) Create (Bk) - [baR: AUTHOUR_IS{relation: 'Author Is'}] -> (Auth);
+	Macth (Bk: Book{authorId: 2}), (Auth: Author{authorId: 2}) Create (Bk) - [baR: AUTHOUR_IS{relation: 'Author Is'}] -> (Auth);
+	Macth (Bk: Book{authorId: 3}), (Auth: Author{authorId: 3}) Create (Bk) - [baR: AUTHOUR_IS{relation: 'Author Is'}] -> (Auth);
+
+Select Nodes data from RelationShip:
+	Match () - [baR: AUTHOUR_IS] -> () Return baR;
+---------------------------------------------------------------------------------------------------------------------
 
