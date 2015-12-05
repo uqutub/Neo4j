@@ -1,0 +1,41 @@
+Step 1:
+Install Neo4j Graph Database from (http://neo4j.com/download/) free edition (Community Edition) after install one widnow will be appeared just press 'start' and above status will be turned around into green color and just click on given link, should be something like ( http://localhost:7474 ).
+
+Note: After open page on browser. there are three major portion, left hand side bar, top textarea and results are shown below given textarea.
+
+
+Create Nodes: (Add)
+Lets create Nodes:
+Syntax: 
+	Create (Cust: Customer {customerName: "Customer A", age: 25} )
+	Create (Addr: Address {address: "Address 1"} )
+
+Note: we are created two nodes, one for customer and other for address, 'Cust' is a node name & 'Customer' is a Label name.
+
+
+Get Customer Node data: (Select)
+Syntax: 
+	Match (Cust: Customer) Return Cust;
+
+For Specific Result:
+	Match (Cust: Customer {customerName: "Customer A"}) Return Cust.age;
+
+For All Nodes result:
+	Match (n) Return n;
+
+
+Set Property: (Edit/Update)
+Syntax:
+	Match (Cust: Customer) Where Cust.customerName = "Customer A" Set Cust.age = 30;
+OR
+	Match (Cust: Customer {customerName: "Customer A"}) Set Cust.age = 30;
+	
+
+Create RelationShip: (One to One)
+Syntax:
+	Match (Cust: Customer{customerName: "Customer A"}), (Addr: Address{address: "Address 1"}) Create (Cust) - [caR: ADDRESS_BELONGS_TO{relationName: "Address Belongs to"}] -> (Addr)
+
+
+
+
+
